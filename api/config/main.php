@@ -12,6 +12,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
+    'defaultRoute' => 'v1/default',
     'modules' => [
         'v1' => [
             'basePath' => '@app/modules/v1',
