@@ -1,10 +1,9 @@
 <?php
 
+use yii\web\Response;
+
 $params = array_merge(
-        require(__DIR__ . '/../../common/config/params.php'),
-        require(__DIR__ . '/../../common/config/params-local.php'),
-        require(__DIR__ . '/params.php'),
-        require(__DIR__ . '/params-local.php')
+        require(__DIR__ . '/../../common/config/params.php'), require(__DIR__ . '/../../common/config/params-local.php'), require(__DIR__ . '/params.php'), require(__DIR__ . '/params-local.php')
 );
 
 return [
@@ -18,6 +17,15 @@ return [
             'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'
         ]
+    ],
+    'bootstrap' => [
+        [
+            'class' => 'yii\filters\ContentNegotiator',
+            'formats' => [
+                'application/json' => Response::FORMAT_JSON,
+                'application/xml' => Response::FORMAT_XML,
+            ],
+        ],
     ],
     'components' => [
         'log' => [
@@ -38,12 +46,8 @@ return [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'response' => [
-            'format' => yii\web\Response::FORMAT_JSON,
-            'charset' => 'UTF-8',
-        ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'v1/default/error',
         ],
     ],
     'params' => $params,
