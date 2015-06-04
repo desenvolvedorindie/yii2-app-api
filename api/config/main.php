@@ -46,6 +46,17 @@ return [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null && ($exception = Yii::$app->getErrorHandler()->exception) !== null) {
+                    $response->data = [
+                        'error' => $response->data,
+                    ];
+                }
+            },
+        ],
         'errorHandler' => [
             'errorAction' => 'v1/default/error',
         ],
