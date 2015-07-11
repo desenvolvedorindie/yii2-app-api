@@ -18,6 +18,15 @@ return [
             'class' => 'api\modules\v1\Module'
         ]
     ],
+    'bootstrap' => [
+        [
+            'class' => yii\filters\ContentNegotiator::className(),
+            'formats' => [
+                'application/json' => Response::FORMAT_JSON,
+                'application/xml' => Response::FORMAT_XML,
+            ],
+        ],
+    ],
     'components' => [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -47,10 +56,8 @@ return [
                     ];
                 }
             },
-        ],
-        'errorHandler' => [
-            'errorAction' => 'v1/default/error',
-        ],
-    ],
-    'params' => $params,
-];
+                ],
+            ],
+            'params' => $params,
+        ];
+        
