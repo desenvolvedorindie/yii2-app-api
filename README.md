@@ -71,13 +71,13 @@ php composer.phar global require "fxp/composer-asset-plugin:~1.0.0"
 php composer.phar create-project --prefer-dist --stability=dev wfcreations/yii2-app-api app
 ~~~
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
+Now you should be able to access the application through the following URL, assuming `app` is the directory
 directly under the Web root.
 
 ~~~
-http://localhost/api/web/
-http://localhost/backend/web/
-http://localhost/frontend/web/
+http://localhost/app/api/web/
+http://localhost/app/backend/web/
+http://localhost/app/frontend/web/
 ~~~
 
 
