@@ -10,6 +10,8 @@ is a separate Yii application.
 The template is designed to work in a team development environment. It supports
 deploying the application in different environments.
 
+[![Latest Stable Version](https://poser.pugx.org/wfcreations/yii2-app-api/v/stable)](https://packagist.org/packages/wfcreations/yii2-app-api) [![Total Downloads](https://poser.pugx.org/wfcreations/yii2-app-api/downloads)](https://packagist.org/packages/wfcreations/yii2-app-api) [![Latest Unstable Version](https://poser.pugx.org/wfcreations/yii2-app-api/v/unstable)](https://packagist.org/packages/wfcreations/yii2-app-api) [![License](https://poser.pugx.org/wfcreations/yii2-app-api/license)](https://packagist.org/packages/wfcreations/yii2-app-api)
+
 DIRECTORY STRUCTURE
 -------------------
 
