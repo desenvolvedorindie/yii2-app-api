@@ -12,8 +12,4 @@ class DefaultController extends Controller {
         throw new NotFoundHttpException("Unsuported action request", 100);
     }
 
-    public function actionError() {
-        return Yii::$app->getErrorHandler()->exception;
-    }
-
 }
