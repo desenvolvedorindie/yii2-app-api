@@ -3,6 +3,7 @@ Directories
 
 The root directory contains the following subdirectories:
 
+- `api` - api web application.
 - `backend` - backend web application.
 - `common` - files common to all applications.
 - `console` - console application.

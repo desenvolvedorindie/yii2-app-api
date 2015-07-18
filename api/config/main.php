@@ -1,9 +1,10 @@
 <?php
 
-use yii\web\Response;
-
 $params = array_merge(
-        require(__DIR__ . '/../../common/config/params.php'), require(__DIR__ . '/../../common/config/params-local.php'), require(__DIR__ . '/params.php'), require(__DIR__ . '/params-local.php')
+        require(__DIR__ . '/../../common/config/params.php'),
+		require(__DIR__ . '/../../common/config/params-local.php'),
+		require(__DIR__ . '/params.php'),
+		require(__DIR__ . '/params-local.php')
 );
 
 return [
@@ -15,15 +16,15 @@ return [
     'modules' => [
         'v1' => [
             'basePath' => '@app/modules/v1',
-            'class' => 'api\modules\v1\Module'
+            'class' => \api\modules\v1\Module::className(),
         ]
     ],
     'bootstrap' => [
         [
-            'class' => yii\filters\ContentNegotiator::className(),
+            'class' => \yii\filters\ContentNegotiator::className(),
             'formats' => [
-                'application/json' => Response::FORMAT_JSON,
-                'application/xml' => Response::FORMAT_XML,
+                'application/json' => \yii\web\Response::FORMAT_JSON,
+                'application/xml' => \yii\web\Response::FORMAT_XML,
             ],
         ],
     ],
@@ -38,16 +39,14 @@ return [
             ],
         ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
-        'request' => [
-            'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]
+			'rules' => [
+                '<controller:\w+>/<id:[\d\-]+>' => 'v1/<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:[\d\-]+>' => 'v1/<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => 'v1/<controller>/<action>',
+            ],
         ],
         'response' => [
-            'class' => 'yii\web\Response',
+            'class' => \yii\web\Response::className(),
             'on beforeSend' => function ($event) {
                 $response = $event->sender;
                 if ($response->data !== null && ($exception = Yii::$app->getErrorHandler()->exception) !== null) {

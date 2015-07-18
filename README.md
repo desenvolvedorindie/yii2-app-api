@@ -101,3 +101,20 @@ return [
 ```
 
 **NOTE:** Yii won't create the database for you, this has to be done manually before you can access it.
+
+### Enabling JSON Input
+
+To let the API accept input data in JSON format, configure the [[yii\web\Request::$parsers]] property of
+the `request` [application component](http://www.yiiframework.com/doc-2.0/guide-structure-application-components.html)
+to use the [[yii\web\JsonParser]] for JSON input:
+
+```php
+'request' => [
+    'parsers' => [
+        'application/json' => 'yii\web\JsonParser',
+    ]
+]
+```
+
+> Info: The above configuration is optional. Without the above configuration, the API would only recognize 
+  `application/x-www-form-urlencoded` and `multipart/form-data` input formats.

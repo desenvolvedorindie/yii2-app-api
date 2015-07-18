@@ -6,6 +6,7 @@ Predefined path aliases
 - `@common` - common directory.
 - `@frontend` - frontend web application directory.
 - `@backend` - backend web application directory.
+- `@api` - api web application directory.
 - `@console` - console directory.
 - `@runtime` - runtime directory of currently running web application.
 - `@vendor` - Composer vendor directory.

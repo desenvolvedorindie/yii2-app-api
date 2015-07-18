@@ -53,6 +53,7 @@ the installed application. You only need to do these once for all.
 
    - for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend.dev/`
    - for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend.dev/`
+   - for api `/path/to/yii-application/api/web/` and using the URL `http://api.dev/`
 
    For Apache it could be the following:
 
@@ -80,6 +81,24 @@ the installed application. You only need to do these once for all.
            DocumentRoot /path/to/yii-application/backend/web/
            
            <Directory "/path/to/yii-application/backend/web/">
+               # use mod_rewrite for pretty URL support
+               RewriteEngine on
+               # If a directory or a file exists, use the request directly
+               RewriteCond %{REQUEST_FILENAME} !-f
+               RewriteCond %{REQUEST_FILENAME} !-d
+               # Otherwise forward the request to index.php
+               RewriteRule . index.php
+           
+               # ...other settings...
+           </Directory>
+       </VirtualHost>
+	   
+	   <VirtualHost *:80>
+           ServerName api.dev
+           ServerAlias 127.0.0.1
+           DocumentRoot /path/to/yii-application/api/web/
+           
+           <Directory "/path/to/yii-application/api/web/">
                # use mod_rewrite for pretty URL support
                RewriteEngine on
                # If a directory or a file exists, use the request directly
@@ -170,6 +189,44 @@ the installed application. You only need to do these once for all.
            }
        }
 
+	   server {
+           charset utf-8;
+           client_max_body_size 128M;
+       
+           listen 80; ## listen for ipv4
+           #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
+       
+           server_name api.dev;
+           root        /path/to/yii-application/api/web/;
+           index       index.php;
+       
+           access_log  /path/to/yii-application/log/api-access.log;
+           error_log   /path/to/yii-application/log/api-error.log;
+       
+           location / {
+               # Redirect everything that isn't a real file to index.php
+               try_files $uri $uri/ /index.php?$args;
+           }
+       
+           # uncomment to avoid processing of calls to non-existing static files by Yii
+           #location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
+           #    try_files $uri =404;
+           #}
+           #error_page 404 /404.html;
+       
+           location ~ \.php$ {
+               include fastcgi_params;
+               fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+               fastcgi_pass   127.0.0.1:9000;
+               #fastcgi_pass unix:/var/run/php5-fpm.sock;
+               try_files $uri =404;
+           }
+       
+           location ~ /\.(ht|svn|git) {
+               deny all;
+           }
+       }
+	   
 5. Change the hosts file to point the domain to your server.
 
    - Windows: `c:\Windows\System32\Drivers\etc\hosts`
@@ -180,6 +237,7 @@ the installed application. You only need to do these once for all.
    ```
    127.0.0.1   frontend.dev
    127.0.0.1   backend.dev
+   127.0.0.1   api.dev
    ```
 
 To login into the application, you need to first sign up, with any of your email address, username and password.
