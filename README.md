@@ -35,14 +35,12 @@ backend
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
 api
-    assets/              contains application assets such as JavaScript and CSS
     config/              contains api configurations
     controllers/         contains Web controller classes
     models/              contains api-specific model classes
     runtime/             contains files generated during runtime
     modules/             contains api versioning
     v1/                  contains module version 1
-    views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
 frontend
     assets/              contains application assets such as JavaScript and CSS
