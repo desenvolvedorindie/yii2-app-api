@@ -11,7 +11,6 @@ return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
-    'bootstrap' => ['log'],
     'defaultRoute' => 'v1/default',
     'modules' => [
         'v1' => [
@@ -20,6 +19,7 @@ return [
         ]
     ],
     'bootstrap' => [
+    	'log',
         [
             'class' => \yii\filters\ContentNegotiator::className(),
             'formats' => [
