@@ -12,18 +12,18 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.4",
-        "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-bootstrap": "^2.0.10",
+        "yiisoft/yii2-swiftmailer": "^2.1.2"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
-        "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*"
+        "codeception/specify": "^0.4.6",
+        "codeception/verify": "0.3.2",
+        "yiisoft/yii2-debug": "^2.0.13",
+        "yiisoft/yii2-gii": "^2.0.7"
     },
     "config": {
         "process-timeout": 1800
